@@ -45,3 +45,10 @@ Set-AzStorageBlobContent -File "~/_TestImages/Image002.jpg" `
 
 # List the blobs in a container
 Get-AzStorageBlob -Container $ContainerName -Context $ctx | select Name
+
+# Data transfer with AzCopy
+#azcopy login
+#azcopy copy 'C:\myDirectory\myTextFile.txt' 'https://mystorageaccount.blob.core.windows.net/mycontainer/myTextFile.txt'
+
+# Clean up resources
+#Remove-AzResourceGroup -Name $resourceGroup
