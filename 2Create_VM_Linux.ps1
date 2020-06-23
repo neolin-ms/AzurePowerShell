@@ -118,7 +118,7 @@ Get-AzResource | Select-Object Name, ResourceType, Location
 Get-AzPublicIpAddress -ResourceGroupName "myResourceGroup" | Select "IpAddress"
 
 # SSH connection command into the shell to create an SSH session
-ssh -i ~/.ssh/id_rsa azureuser@52.186.159.189
+#ssh -i ~/.ssh/id_rsa azureuser@52.186.159.189
 
 ## Clean up resources
 #Remove-AzResourceGroup -Name "myResourceGroup"
