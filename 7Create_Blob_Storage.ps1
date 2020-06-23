@@ -28,6 +28,11 @@ $ctx = $storageAccount.Context
 $containerName = "quickstartblobs"
 New-AzStorageContainer -Name $containerName -Context $ctx -Permission blob
 
+## Show Container, Blob.
+$storageAcc = Get-AzStorageAccount -ResourceGroupName $resourceGroup
+$ctx = $storageAcc.Context
+Get-AzStorageContainer -Context $ctx
+
 # Upload blobs to the container
 # Blob storage supports block blobs, append blobs, and page blobs. VHD files that back IaaS VMs are page blobs. Use append blobs for logging, such as when you want to write to a file and then keep adding more information. Most files stored in Blob storage are block blobs.
 
