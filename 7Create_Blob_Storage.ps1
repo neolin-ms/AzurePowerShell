@@ -55,5 +55,11 @@ Get-AzStorageBlob -Container $ContainerName -Context $ctx | select Name
 #azcopy login
 #azcopy copy 'C:\myDirectory\myTextFile.txt' 'https://mystorageaccount.blob.core.windows.net/mycontainer/myTextFile.txt'
 
+## View account access keys
+$storageAccountKey = `
+    (Get-AzStorageAccountKey `
+    -ResourceGroupName $resourceGroup `
+    -Name $storageAccount).Value[0]
+
 # Clean up resources
 #Remove-AzResourceGroup -Name $resourceGroup
