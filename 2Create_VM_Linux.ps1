@@ -121,4 +121,10 @@ Get-AzPublicIpAddress -ResourceGroupName "myResourceGroup" | Select "IpAddress"
 #ssh -i ~/.ssh/id_rsa azureuser@52.186.159.189
 
 ## Clean up resources
-#$job = Remove-AzResourceGroup -Name "myResourceGroup" -Fore -AsJob
+#$job = Remove-AzResourceGroup -Name "myResourceGroup" -Force -AsJob
+
+# Show clean state 
+#$job
+
+# To wait until the deletion is complete, use the following command:
+#Wait-Job -Id $job.Id 
