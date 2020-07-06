@@ -62,6 +62,9 @@ $newVM2 = New-AzVM @vm2Params
 $newVM2
 Get-AzVM -Status
 
+# To see the public IP address of the VMs
+Get-AzPublicIpAddress -ResourceGroupName "TutorialResources" | Select "IpAddress"
+
 # You can skip a few steps to get the public IP address of the new VM since it's returned in the FullyQualifiedDomainName property of the $newVM2 object. 
 # Use the following command to connect using Remote Desktop.
 #mstsc.exe /v $newVM2.FullyQualifiedDomainName
