@@ -90,10 +90,10 @@ Set-AzVMOperatingSystem `
   -Credential $cred `
   -DisablePasswordAuthentication | `
 Set-AzVMSourceImage `
-  -PublisherName "Canonical" `
-  -Offer "UbuntuServer" `
-  -Skus "16.04-LTS" `
-  -Version "latest" | `
+  -PublisherName "OpenLogic" `
+  -Offer "CentOS" `
+  -Skus "7.3" `
+  -Version "7.3.20161221" | `
 Add-AzVMNetworkInterface `
   -Id $nic.Id
 
