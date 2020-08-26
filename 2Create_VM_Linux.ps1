@@ -2,13 +2,13 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-powershell
 
 ## Gets all locations and the supported resource providers for each location.
-Get-AzLocation | Format-Table
+#Get-AzLocation | Format-Table
 
 ## View all the services in a particular region
-$providers = Get-AzLocation | Where-Object {$_.Location -eq "eastasia"}
+#$providers = Get-AzLocation | Where-Object {$_.Location -eq "eastasia"}
 
 ## Vice the available Resource Provider
-$providers.Providers
+#$providers.Providers
 
 ## Create a resource group
 New-AzResourceGroup -Name "myResourceGroup" -Location "eastasia"
