@@ -11,7 +11,7 @@
 #$providers.Providers
 
 ## Create a resource group
-New-AzResourceGroup -Name "myResourceGroup" -Location "japanwest"
+New-AzResourceGroup -Name "myResourceGroup" -Location "eastasia"
 
 ## Create virtual network resources
 # Create a subnet configuration
@@ -22,7 +22,7 @@ $subnetConfig = New-AzVirtualNetworkSubnetConfig `
 # Create a virtual network
 $vnet = New-AzVirtualNetwork `
   -ResourceGroupName "myResourceGroup" `
-  -Location "japanwest" `
+  -Location "eastasia" `
   -Name "myVNET" `
   -AddressPrefix 192.168.0.0/16 `
   -Subnet $subnetConfig
@@ -30,7 +30,7 @@ $vnet = New-AzVirtualNetwork `
 # Create a public IP address and specify a DNS name
 $pip = New-AzPublicIpAddress `
   -ResourceGroupName "myResourceGroup" `
-  -Location "japanwest" `
+  -Location "eastasia" `
   -AllocationMethod Static `
   -IdleTimeoutInMinutes 4 `
   -Name "mypublicdns$(Get-Random)"
@@ -62,7 +62,7 @@ $nsgRuleWeb = New-AzNetworkSecurityRuleConfig `
 # Create a network security group
 $nsg = New-AzNetworkSecurityGroup `
   -ResourceGroupName "myResourceGroup" `
-  -Location "japanwest" `
+  -Location "eastasia" `
   -Name "myNetworkSecurityGroup" `
   -SecurityRules $nsgRuleSSH,$nsgRuleWeb
 
@@ -70,7 +70,7 @@ $nsg = New-AzNetworkSecurityGroup `
 $nic = New-AzNetworkInterface `
   -Name "myNic" `
   -ResourceGroupName "myResourceGroup" `
-  -Location "japanwest" `
+  -Location "eastasia" `
   -SubnetId $vnet.Subnets[0].Id `
   -PublicIpAddressId $pip.Id `
   -NetworkSecurityGroupId $nsg.Id
@@ -90,10 +90,10 @@ Set-AzVMOperatingSystem `
   -Credential $cred `
   -DisablePasswordAuthentication | `
 Set-AzVMSourceImage `
-  -PublisherName "Canonical" `
-  -Offer "UbuntuServer" `
-  -Skus "18.04-LTS" `
-  -Version "18.04.202007081" | `
+  -PublisherName "OpenLogic" `
+  -Offer "CentOS" `
+  -Skus "7.3" `
+  -Version "7.3.20161221" | `
 Add-AzVMNetworkInterface `
   -Id $nic.Id
 
@@ -107,7 +107,7 @@ Add-AzVMSshPublicKey `
 # Now, combine the previous configuration definitions to create with New-AzVM:
 New-AzVM `
   -ResourceGroupName "myResourceGroup" `
-  -Location japanwest  -VM $vmConfig
+  -Location eastasia -VM $vmConfig
 
 # Confirm the new VM
 Get-AzVM -Status
