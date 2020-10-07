@@ -90,10 +90,10 @@ Set-AzVMOperatingSystem `
   -Credential $cred `
   -DisablePasswordAuthentication | `
 Set-AzVMSourceImage `
-  -PublisherName "Canonical" `
-  -Offer "UbuntuServer" `
-  -Skus "18.04-LTS" `
-  -Version "18.04.202007081" | `
+  -PublisherName "SUSE" `
+  -Offer "sles-15-sp1-basic" `
+  -Skus "gen1" `
+  -Version "2020.06.10" | `
 Add-AzVMNetworkInterface `
   -Id $nic.Id
 
