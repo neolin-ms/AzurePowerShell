@@ -93,7 +93,7 @@ Set-AzVMSourceImage `
   -PublisherName "SUSE" `
   -Offer "sles-15-sp1-basic" `
   -Skus "gen1" `
-  -Version "2020.06.10" | `
+  -Version "2020.02.26" | `
 Add-AzVMNetworkInterface `
   -Id $nic.Id
 
