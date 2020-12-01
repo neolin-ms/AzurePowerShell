@@ -13,6 +13,9 @@ Install-Module -Name Az -AllowClobber -Scope AllUsers
 # Let’s confirm if the module is installed:
 Get-Module -ListAvailable *Az*
 
+# Check if you have multiple versions of Azure PowerShell installled.
+Get-InstalledModule -Name Az -AllVersions | Select-Object -Property Name, Version
+
 # Change the execution policy
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
