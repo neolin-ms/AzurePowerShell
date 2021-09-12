@@ -26,12 +26,13 @@ $deleteSnapshot = Get-AzStorageShare -Context $storageAcct.Context -Name $shareN
 # Delete a share snapshot
 Remove-AzStorageShare -Share $deleteSnapshot.CloudFileShare -Confirm:$false -Force
 
-# Remove the latest old snapshot of Azure File Share 
+# Remove the oldest snapshot of Azure File Share 
 
 $outputNum = Get-AzStorageShare -Context $storageAcct.Context | Where-Object { $_.Name -eq $shareName.name -and $_.IsSnapshot -eq $true } | Measure-Object
 if ( 200 -eq $outputNum.Count )
 { 
-  Write-Output "The condition was true"
+  Write-Output "The maximum number of share snapshots that Azure Files allows today is 200. `
+    After 200 share snapshots, you have to delete older share snapshots in order to create new ones."
   $outputArrary = Get-AzStorageShare `
     -Context $storageAcct.Context `
     | Where-Object { $_.Name -eq $shareName.name -and $_.IsSnapshot -eq $true } `
@@ -39,9 +40,12 @@ if ( 200 -eq $outputNum.Count )
     | Select-Object -Property SnapshotTime
   $snapshotTime = "$($outputArrary[0].SnapshotTime.UtcDateTime) +00:00" 
   $deleteSnapshot = Get-AzStorageShare -Context $storageAcct.Context -Name $shareName.Name -SnapshotTime $snapshotTime 
-  Remove-AzStorageShare -Share $deleteSnapshot.CloudFileShare -Confirm:$false -Force
+  Write-Output "Start to delete snapshot $deleteSnapshot now."
+  $job = Remove-AzStorageShare -Share $deleteSnapshot.CloudFileShare -Confirm:$false -Force
+  Wait-Job -Id $job.Id
 }
 else
 { 
-  Write-Output "The condition was false"
+  Write-Output "The maximum number of share snapshots that Azure Files allows today is 200. `
+    Your share snapshopts are $outputNum.Conut now."
 }
