@@ -15,8 +15,18 @@ $snapshot = $share.CloudFileShare.Snapshot()
 
 # browse the contents of the share snapshot
 Get-AzStorageFile -Share $snapshot
+$snapshot | fl
 
 # list of snapshots you've taken
 Get-AzStorageShare `
         -Context $storageAcct.Context | `
     Where-Object { $_.Name -eq $shareName.name -and $_.IsSnapshot -eq $true }
+
+# Get a file share snapshot with specific share name and SnapshotTime
+$deleteSnapshot = Get-AzStorageShare -Context $storageAcct.Context -Name $shareName.name -SnapshotTime "9/12/2021 11:19:34 AM +00:00"
+
+# Delete a share snapshot
+Remove-AzStorageShare `
+    -Share $deleteSnapshot.CloudFileShare `
+    -Confirm:$false `
+    -Force
