@@ -11,7 +11,6 @@
 # Everything you wanted to know about the if statement
 # https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.1
 
-
 # Get the Storage Account context for retrieve the storage account key to perform the indicated actions against the file share
 $rg_name = "myResourceGroup"
 $sa_name = "mystorageacct266040474"
@@ -38,7 +37,6 @@ $deleteSnapshot = Get-AzStorageShare -Context $storageAcct.Context -Name $shareN
 Remove-AzStorageShare -Share $deleteSnapshot.CloudFileShare -Confirm:$false -Force
 
 # Remove the oldest snapshot of Azure File Share 
-
 $outputNum = Get-AzStorageShare -Context $storageAcct.Context | Where-Object { $_.Name -eq $shareName.name -and $_.IsSnapshot -eq $true } | Measure-Object
 if ( 200 -eq $outputNum.Count )
 { 
