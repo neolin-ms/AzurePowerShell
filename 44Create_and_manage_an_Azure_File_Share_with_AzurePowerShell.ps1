@@ -45,7 +45,7 @@ if ( 200 -eq $outputNum.Count )
   $outputArrary = Get-AzStorageShare `
     -Context $storageAcct.Context `
     | Where-Object { $_.Name -eq $shareName.name -and $_.IsSnapshot -eq $true } `
-    | Sort-Object -Property SnapshotTime -Descending `
+    | Sort-Object -Property SnapshotTime `
     | Select-Object -Property SnapshotTime
   $snapshotTime = "$($outputArrary[0].SnapshotTime.UtcDateTime) +00:00" 
   $deleteSnapshot = Get-AzStorageShare -Context $storageAcct.Context -Name $shareName.Name -SnapshotTime $snapshotTime 
